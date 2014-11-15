@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+#
+# A-Oneのラベル用紙「30シート」(L24A-30)に数字を印刷するHTMLを生成
+#
+# Firefoxの「ページ設定」で「A4縁ナシ」を選ぶ
+#
+
+if ARGV.length != 1
+  STDERR.puts "% label 100 > label.html"
+  exit
+end
+
+start = ARGV[0].to_i
+
+print <<EOF
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+body {
+  width:210mm;
+  margin:0mm 0mm 0mm -15mm;
+  padding:0;
+  border:0;
+}
+div {
+  float:left;
+  font-size:21mm;
+  width:70mm;
+  height:33.9mm;
+}
+</style>
+</head>
+<body>
+EOF
+
+(start...start+12).each { |i|
+  puts "<div><center>#{i}</center></div>"
+  puts "<div><center>#{i}</center></div>"
+}
+
+print <<EOF
+</body>
+</html>
+EOF
+
