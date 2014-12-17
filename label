@@ -6,9 +6,15 @@
 # Firefoxの「ページ設定」で「A4縁ナシ」を選ぶ
 #
 
-if ARGV.length != 1
+if ARGV.length == 0
   STDERR.puts "% label 100 > label.html"
   exit
+end
+
+singlemode = false
+if ARGV[0] == "-s"
+  singlemode = true
+  ARGV.shift
 end
 
 start = ARGV[0].to_i
@@ -35,10 +41,16 @@ div {
 <body>
 EOF
 
-(start...start+12).each { |i|
-  puts "<div><center>#{i}</center></div>"
-  puts "<div><center>#{i}</center></div>"
-}
+if singlemode then
+  (start...start+24).each { |i|
+    puts "<div><center>#{i}</center></div>"
+  }
+else
+  (start...start+12).each { |i|
+    puts "<div><center>#{i}</center></div>"
+    puts "<div><center>#{i}</center></div>"
+  }
+end
 
 print <<EOF
 </body>
